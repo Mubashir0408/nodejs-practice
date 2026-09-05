@@ -1,6 +1,6 @@
 const fs=require("fs")
 
-fs.writeFileSync(".test.txt","hi there")
+fs.writeFileSync("test.txt","hi there")
 
 const result=fs.readFileSync("./contact.txt","UTF-8")
 console.log(result)
@@ -13,3 +13,5 @@ fs.readFile=fs.readFile("./contact.txt","UTF-8",(err,result)=>{
         console.log(result)
     }
 })
+
+fs.appendFileSync("./apend.txt",`hey there\n`)
