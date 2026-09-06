@@ -17,3 +17,4 @@ fs.readFile=fs.readFile("./contact.txt","UTF-8",(err,result)=>{
 fs.appendFileSync("./apend.txt",`hey there\n`)
 
 fs.cpSync("./apend.txt","./copy.txt")
+fs.unlinkSync("./copy.txt")
