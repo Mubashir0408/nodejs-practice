@@ -20,3 +20,4 @@ fs.cpSync("./apend.txt","./copy.txt")
 fs.unlinkSync("./copy.txt")
 
 console.log(fs.statSync("./test.txt").isFile());
+
