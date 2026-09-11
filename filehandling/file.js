@@ -1,5 +1,6 @@
 const fs=require("fs")
-
+const os=require("os")
+console.log(os.cpus().length)
 fs.writeFileSync("test.txt","hi there")
 
 const result=fs.readFileSync("./contact.txt","UTF-8")
@@ -20,4 +21,6 @@ fs.cpSync("./apend.txt","./copy.txt")
 fs.unlinkSync("./copy.txt")
 
 console.log(fs.statSync("./test.txt").isFile());
+
+
 
