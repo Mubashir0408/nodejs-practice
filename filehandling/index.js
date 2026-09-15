@@ -6,4 +6,4 @@ const myserver=http.createServer((req,res)=>{
     res.end("HELLO")
 });
 
-myserver.listen(8000,()=>console.log("server started"));
+myserver.listen(3000,()=>console.log("server started"));
