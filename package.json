@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Mubashir0408/nodejs-practice/issues"
   },
-  "homepage": "https://github.com/Mubashir0408/nodejs-practice#readme"
+  "homepage": "https://github.com/Mubashir0408/nodejs-practice#readme",
+  "dependencies": {
+    "url": "^0.11.4"
+  }
 }
