@@ -1,22 +1,41 @@
 const http= require("http");
-const fs=require("fs")
+const fs=require("fs");
+const url=require("url")
 
-const myserver =http.createServer((req,res)=>{
-const log=`${Date.now()}:new request received\n`
+const myServer = http.createServer((req, res) => {
+    if (req.url === "/favicon.ico") return res.end();
 
-fs.appendFile("./log.txt",log,(err,data)=>{
-    switch(req.url){
-        case "/":
-            res.end("home page");
-            break;
-    case "/about":
-           res.end("about page")
-              break;  
-    default:
-        res.end("404")}
-              
+    const log = `${Date.now()}:${req.method} ${req.url}: New Req Received\n`;
+    const myUrl = url.parse(req.url, true)
 
-})
+    fs.appendFile("log.txt", log, (err, data) => {
+        switch (myUrl.pathname) {
+            case "/":
+               if (req.methode==="GET") res.end("HOME PAGE")
+                break;
+            case "/about":
+                const username = myUrl.query.myname;
+                res.end(`Hi, ${username}`);
+                break;
+
+            case "/search":
+                const search = myUrl.query.search_query;
+                res.end("Here are your results for " + search);
+                break;
+
+              case "/signup":
+                if(req.method==="GET")res.end("signup page");
+                    else(req.methode==="POST") 
+                    {
+                //databse will save 
+                req.end("sucess")
+            } 
+             break;
+
+            default:
+                res.end("404 Not Found");
+        }
+    });
 });
 
-myserver.listen(8000,()=>console.log("server started"));
+myServer.listen(8000, () => console.log("Server Started!"));
