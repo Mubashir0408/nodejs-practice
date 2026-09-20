@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Mubashir0408/nodejs-practice#readme",
   "dependencies": {
+    "express": "^5.2.1",
     "url": "^0.11.4"
   }
 }
