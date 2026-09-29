@@ -19,6 +19,17 @@ I am learning Node.js step by step as part of my backend development journey.
 * HTTP Module
 * HTTP Server
 * Requests and Responses
+## Topics Covered
+
+* Node.js Fundamentals
+* CommonJS and ES Modules
+* File System (`fs`) and Path (`path`)
+* Node.js Architecture
+* HTTP Module and HTTP Servers
+* Express.js Fundamentals
+* Routing and Middleware
+* HTTP Methods (GET, POST, PUT, PATCH, DELETE)
+* HTTP Status Codes
 
 ## Purpose
 
