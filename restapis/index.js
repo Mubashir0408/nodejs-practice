@@ -1,10 +1,39 @@
 const express=require("express")
 const users=require("./MOCK_DATA.json")
-const fs=require("fs")
+const mongoose=require("mongoose")
+const fs=require("fs");
+const { type } = require("os");
 
 const app=express();
 const port=3000;
 app.use(express.urlencoded({ extended: false }));
+
+ mongoose.connect('mongodb://127.0.0.1:27017/youtube-app-1')
+ .then(()=>console.log("mongodb connected"))
+.catch((err)=>console.log("mongodb error",err))
+//schema
+const userschema=new mongoose.Schema ({
+  firstname:{
+    type:String,
+    required:true,
+  },
+
+  lastname:{
+    type:String,
+    
+  },
+  email:{
+    type:String,
+    required: true,
+    unique:true,
+  },
+  jobtitle:{
+    type:String,
+  }
+})
+
+const user=mongoose.model("user",userschema)
+
 
 app.use((req,res,next)=>{
 console.log("Hello from middleware 1")
