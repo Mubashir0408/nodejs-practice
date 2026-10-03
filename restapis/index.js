@@ -7,6 +7,7 @@ const { type } = require("os");
 const app=express();
 const port=3000;
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
  mongoose.connect('mongodb://127.0.0.1:27017/youtube-app-1')
  .then(()=>console.log("mongodb connected"))
@@ -73,12 +74,33 @@ app.route("/api/users/:id")
     //remove user
     res.json({status:"pending"});
 });
-app.post("/api/users", (req, res) => {
+
+app.post("/api/users", async (req, res) => {
   const body = req.body;
-  users.push({ ...body, id: users.length + 1 });
-  fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-    return res.json({ status: "pending" });
-  });
+  if (
+    !body ||
+    !body.firstname ||
+    !body.lastname ||
+    !body.email ||
+    !body.job_title
+  ) {
+    return res.status(400).json({ msg: "All fields are required" });
+  }
+
+ const result = await user.create({
+  firstname: body.firstname,
+  lastname: body.lastname,
+  email: body.email,
+  jobtitle: body.job_title,
 });
+
+
+
+console.log("result ",result)
+  return res.status(201).json({msg:"sucess"});
+
+});
+
+
 
 app.listen(port , ()=>console.log(`server start at ${port}`))
