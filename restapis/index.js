@@ -1,13 +1,12 @@
 const express=require("express")
 const users=require("./MOCK_DATA.json")
 const mongoose=require("mongoose")
-const fs=require("fs");
 const { type } = require("os");
 
 const app=express();
 const port=3000;
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+
 
  mongoose.connect('mongodb://127.0.0.1:27017/youtube-app-1')
  .then(()=>console.log("mongodb connected"))
@@ -33,7 +32,7 @@ const userschema=new mongoose.Schema ({
   }
 })
 
-const user=mongoose.model("user",userschema)
+const user =mongoose.model("user",userschema)
 
 
 app.use((req,res,next)=>{
@@ -45,18 +44,25 @@ console.log("Hello from middleware 2")
 next();
 });
 
-app.get("/users", (req, res) => {
+app.get("/users", async(req, res) => {
+
+    const userdb= await user.find({});
     const html =
     `<ul>
-        ${users.map(user => `<li>${user.first_name}</li>`).join("")}
+        ${userdb.map(user => `<li>${user.firstname}-${user.email}</li>`).join("")}
     </ul>`;
 
     res.send(html);
 });
 
-app.get("/api/users",(req,res)=>{
-    
+app.get("/api/users",async (req,res)=>{
     res.json(users)
+})
+
+app.get("/api/users",async(req,res)=>{
+     const userdb= await user.find({});
+    res.setHeader("X-myname","Mubashir Ejaz")
+    res.json(userdb)
 })
 
 app.route("/api/users/:id")
