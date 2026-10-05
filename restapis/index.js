@@ -55,9 +55,6 @@ app.get("/users", async(req, res) => {
     res.send(html);
 });
 
-app.get("/api/users",async (req,res)=>{
-    res.json(users)
-})
 
 app.get("/api/users",async(req,res)=>{
      const userdb= await user.find({});
@@ -66,18 +63,17 @@ app.get("/api/users",async(req,res)=>{
 })
 
 app.route("/api/users/:id")
-.get((req,res)=>{
-    const id=Number(req.params.id);
-    const user=users.find((user)=>user.id===id);
-    res.json(user);
-})
+.get(async(req,res)=>{
 
-.patch((req,res)=>{
-    //edit users
-    res.json({status:"pending"});
+   const User= await user.findById(req.params.id);
+    res.json(User);
 })
-.delete((req,res)=>{
-    //remove user
+.patch(async(req,res)=>{
+     await user.findByIdAndUpdate(req.params.id,{lastname:"changed"});
+    res.json({status:"sucess"});
+})
+.delete(async(req,res)=>{
+     await user.findByIdAndDelete(req.params.id);
     res.json({status:"pending"});
 });
 
