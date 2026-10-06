@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mubashir0408/nodejs-practice.git"
@@ -21,6 +20,7 @@
   "homepage": "https://github.com/Mubashir0408/nodejs-practice#readme",
   "dependencies": {
     "express": "^5.2.1",
+    "mongoose": "^9.10.3",
     "nodemon": "^3.1.14",
     "url": "^0.11.4"
   }
